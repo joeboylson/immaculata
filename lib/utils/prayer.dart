@@ -1,5 +1,3 @@
-import "package:json_schema/json_schema.dart";
-
 class Prayer {
   List listData;
   List<Map> blocks = [];

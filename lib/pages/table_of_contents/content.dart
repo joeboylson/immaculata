@@ -1,10 +1,6 @@
-List<Map> tableOfContents = [
-  {
-    "name": "Open Sample",
-    "filename": "sample.json",
-  },
-  {
-    "name": "Open New Prayer",
+List<Map> tableOfContents = List.generate(50, (int i) {
+  return {
+    "name": "Prayer #${i + 1}",
     "filename": "new-prayer.json",
-  }
-];
+  };
+});

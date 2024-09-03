@@ -53,7 +53,8 @@ class _PrayerViewState extends State<PrayerView> {
         children: [
           TextButton(
             onPressed: () {
-              goToTableOfContentRoute(context);
+              // goToTableOfContentRoute(context);
+              Navigator.pop(context);
             },
             child: const Text("Back"),
           ),

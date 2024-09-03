@@ -6,6 +6,7 @@ class TableOfContentsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 200,
       decoration: const BoxDecoration(color: Color.fromARGB(25, 0, 0, 0)),
       child: const Padding(
         padding: EdgeInsets.all(8),

@@ -9,5 +9,5 @@ final tableOfContentsRoute = GoRoute(
 );
 
 void goToTableOfContentRoute(BuildContext context) {
-  context.go(tableOfContentsRoute.path);
+  context.push(tableOfContentsRoute.path);
 }

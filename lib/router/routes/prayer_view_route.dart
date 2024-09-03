@@ -15,5 +15,5 @@ final prayerViewRoute = GoRoute(
 );
 
 void goToPrayerViewRoute(BuildContext context, String prayerFile) {
-  context.go(prayerViewRoute.path, extra: prayerFile);
+  context.push(prayerViewRoute.path, extra: prayerFile);
 }
