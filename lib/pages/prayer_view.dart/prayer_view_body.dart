@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:immaculata_app/blocks/body.dart';
-import 'package:immaculata_app/blocks/body_centered.dart';
-import 'package:immaculata_app/blocks/centered_title.dart';
-import 'package:immaculata_app/blocks/full_image.dart';
-import 'package:immaculata_app/blocks/info_text.dart';
-import 'package:immaculata_app/blocks/litany.dart';
-import 'package:immaculata_app/blocks/quote.dart';
-import 'package:immaculata_app/blocks/reference.dart';
-import 'package:immaculata_app/blocks/small_image.dart';
+import 'package:immaculata_app/blocks/index.dart';
+import 'package:immaculata_app/pages/prayer_view.dart/prayer_view_header.dart';
 import 'package:immaculata_app/utils/layout.dart';
 
 class PrayerViewBody extends StatelessWidget {
@@ -17,10 +10,10 @@ class PrayerViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: List.from(blocks).map((i) {
@@ -56,9 +49,6 @@ class PrayerViewBody extends StatelessWidget {
               case "Image":
                 return FullImage(dataUrl: dataUrl);
 
-              /**
-               * TODO: small image is not fitting width;
-               */
               case "Small Image":
                 String dataUrl = extra?["imageUrl"] ?? "";
                 return SmallImage(dataUrl: dataUrl);
@@ -71,9 +61,8 @@ class PrayerViewBody extends StatelessWidget {
           }).map((i) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.black12),
                 child: i,
               ),
             );

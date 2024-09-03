@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:immaculata_app/layout/page_wrapper/page_wrapper.dart';
 import 'package:immaculata_app/pages/prayer_view.dart/prayer_view_body.dart';
+import 'package:immaculata_app/pages/prayer_view.dart/prayer_view_header.dart';
 import 'package:immaculata_app/utils/json.dart';
+import 'package:immaculata_app/utils/layout.dart';
 import 'package:immaculata_app/utils/prayer.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class PrayerView extends StatefulWidget {
   const PrayerView({
@@ -48,21 +51,24 @@ class _PrayerViewState extends State<PrayerView> {
   Widget build(BuildContext context) {
     return PageWrapper(
       loading: loading,
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Column(
+      child: LayoutBuilder(builder: (context, contraints) {
+        final bodyHeight = contraints.maxHeight - prayerViewHeaderHeight;
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextButton(
-              onPressed: () {
-                // goToTableOfContentRoute(context);
-                Navigator.pop(context);
-              },
-              child: const Text("Back"),
+            const SizedBox(
+              height: prayerViewHeaderHeight,
+              child: PrayerViewHeader(),
             ),
-            PrayerViewBody(blocks: prayer.blocks)
+            SizedBox(
+              height: bodyHeight,
+              child: PrayerViewBody(blocks: prayer.blocks),
+            )
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }
