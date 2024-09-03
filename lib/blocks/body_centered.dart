@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:immaculata_app/blocks/utils.dart';
 
 class BodyCentered extends StatelessWidget {
@@ -8,10 +9,13 @@ class BodyCentered extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: bodyTextStyle,
-      textAlign: TextAlign.center,
+    return MarkdownBody(
+      fitContent: false,
+      data: text,
+      styleSheet: MarkdownStyleSheet(
+        textAlign: WrapAlignment.center,
+        p: bodyTextStyle,
+      ),
     );
   }
 }

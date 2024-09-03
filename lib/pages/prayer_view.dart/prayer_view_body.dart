@@ -8,6 +8,7 @@ import 'package:immaculata_app/blocks/litany.dart';
 import 'package:immaculata_app/blocks/quote.dart';
 import 'package:immaculata_app/blocks/reference.dart';
 import 'package:immaculata_app/blocks/small_image.dart';
+import 'package:immaculata_app/utils/layout.dart';
 
 class PrayerViewBody extends StatelessWidget {
   const PrayerViewBody({super.key, required this.blocks});
@@ -16,44 +17,68 @@ class PrayerViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        children: List.from(blocks).map((i) {
-          String type = i["type"];
-          String text = "$type: ${i["text"] ?? "(no text)"}";
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: List.from(blocks).map((i) {
+            String type = i["type"];
+            String text = "${i["text"] ?? "(no text)"}";
 
-          switch (type) {
-            case "Body":
-              return Body(text: text);
+            // extra
+            Map? extra = i["extra"];
 
-            case "Centered Title":
-              return CenteredTitle(text: text);
+            // image
+            String dataUrl = extra?["imageUrl"] ?? "";
 
-            case "Body Centered":
-              return BodyCentered(text: text);
+            switch (type) {
+              case "Body":
+                return Body(text: text);
 
-            case "Info Text":
-              return InfoText(text: text);
+              case "Centered Title":
+                return CenteredTitle(text: text);
 
-            case "Reference":
-              return Reference(text: text);
+              case "Body Centered":
+                return BodyCentered(text: text);
 
-            case "Quote":
-              return Quote(text: text);
+              case "Info Text":
+                return InfoText(text: text);
 
-            case "Image":
-              return FullImage(src: text);
+              case "Reference":
+                return Reference(text: text);
 
-            case "Small Image":
-              return SmallImage(src: text);
+              case "Quote":
+                String author = extra?["quoteReference"] ?? "";
+                return Quote(text: text, author: author);
 
-            case "Litany":
-              return Litany(text: text);
-            default:
-              return const Text("(undefined type)");
-          }
-        }).toList(),
+              case "Image":
+                return FullImage(dataUrl: dataUrl);
+
+              /**
+               * TODO: small image is not fitting width;
+               */
+              case "Small Image":
+                String dataUrl = extra?["imageUrl"] ?? "";
+                return SmallImage(dataUrl: dataUrl);
+
+              case "Litany":
+                return Litany(text: text);
+              default:
+                return const Text("(undefined type)");
+            }
+          }).map((i) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(color: Colors.black12),
+                child: i,
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

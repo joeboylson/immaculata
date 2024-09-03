@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:immaculata_app/blocks/utils.dart';
 
 class Body extends StatelessWidget {
@@ -8,9 +9,12 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: bodyTextStyle,
+    return MarkdownBody(
+      fitContent: false,
+      data: text,
+      styleSheet: MarkdownStyleSheet(
+        p: bodyTextStyle,
+      ),
     );
   }
 }

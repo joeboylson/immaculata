@@ -25,11 +25,9 @@ class _TableOfContentsState extends State<TableOfContents> {
 
   @override
   Widget build(BuildContext context) {
-    final pageHeight = getPageHeight(context);
-
     return PageWrapper(
       child: SizedBox(
-        height: pageHeight,
+        height: getPageHeight(context),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(

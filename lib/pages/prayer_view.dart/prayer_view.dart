@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:immaculata_app/layout/page_wrapper/page_wrapper.dart';
 import 'package:immaculata_app/pages/prayer_view.dart/prayer_view_body.dart';
-import 'package:immaculata_app/router/routes/index.dart';
 import 'package:immaculata_app/utils/json.dart';
 import 'package:immaculata_app/utils/prayer.dart';
 
@@ -49,17 +48,20 @@ class _PrayerViewState extends State<PrayerView> {
   Widget build(BuildContext context) {
     return PageWrapper(
       loading: loading,
-      child: Column(
-        children: [
-          TextButton(
-            onPressed: () {
-              // goToTableOfContentRoute(context);
-              Navigator.pop(context);
-            },
-            child: const Text("Back"),
-          ),
-          PrayerViewBody(blocks: prayer.blocks)
-        ],
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                // goToTableOfContentRoute(context);
+                Navigator.pop(context);
+              },
+              child: const Text("Back"),
+            ),
+            PrayerViewBody(blocks: prayer.blocks)
+          ],
+        ),
       ),
     );
   }
